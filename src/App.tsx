@@ -1,6 +1,7 @@
-import { Box, Container, TextField, Typography } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 
 import { FlightTable } from "./components/FlightTable/FlightTable";
+import { PromptField } from "./components/PromptField/PromptField";
 
 const App = () => {
   return (
@@ -11,15 +12,7 @@ const App = () => {
 
       <FlightTable />
 
-      <Box sx={{ position: "fixed", bottom: 0, width: "100%" }}>
-        <TextField
-          multiline
-          slotProps={{ input: { sx: { height: "100px" } } }}
-          label="Enter flight search prompt..."
-          variant="outlined"
-          sx={{ width: "100%", bgcolor: "#fff", height: "100px" }}
-        />
-      </Box>
+      <PromptField />
     </Container>
   );
 };

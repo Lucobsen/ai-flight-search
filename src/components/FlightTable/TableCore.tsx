@@ -3,7 +3,6 @@ import flights from "../../data/flights.json";
 
 export const TableCore = () => {
   const flightArray = Object.values(flights);
-  console.log(flightArray);
 
   return (
     <TableBody>
