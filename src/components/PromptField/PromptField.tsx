@@ -7,7 +7,7 @@ export const PromptField = () => {
   const messages: ModelMessage[] = [];
   const [prompt, setPrompt] = useState("");
 
-  const handleOnClick = () => {
+  const handleOnClick = async () => {
     messages.push({ role: "user", content: prompt });
 
     const result = streamText({
@@ -15,7 +15,14 @@ export const PromptField = () => {
       messages,
     });
 
-    console.log(result);
+    let fullResponse = "";
+
+    for await (const delta of result.textStream) {
+      fullResponse += delta;
+    }
+
+    messages.push({ role: "assistant", content: fullResponse });
+    console.log(messages);
   };
 
   return (
