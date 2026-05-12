@@ -1,12 +1,21 @@
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
 import { Box, IconButton, Stack, TextField } from "@mui/material";
+import { streamText, type ModelMessage } from "ai";
 import { useState } from "react";
 
 export const PromptField = () => {
+  const messages: ModelMessage[] = [];
   const [prompt, setPrompt] = useState("");
 
   const handleOnClick = () => {
-    console.log(prompt);
+    messages.push({ role: "user", content: prompt });
+
+    const result = streamText({
+      model: "anthropic/claude-sonnet-4.5",
+      messages,
+    });
+
+    console.log(result);
   };
 
   return (
@@ -21,7 +30,12 @@ export const PromptField = () => {
         />
         <IconButton
           color="primary"
-          sx={{ width: "100px" }}
+          sx={{
+            width: "100px",
+            borderRadius: "unset",
+            bgcolor: "#fff",
+            ":hover": { bgcolor: "#fff" },
+          }}
           onClick={handleOnClick}
         >
           <SendRoundedIcon />
